@@ -28,19 +28,20 @@ public class QNameList {
 			if (next == XMLStreamReader.PROCESSING_INSTRUCTION
 					&& reader.getPITarget().equals(encryptPI)) {
 				// encrypt the next element
-				int eventType = reader.next();
-				qnames.add(readCharacters(reader, eventType));
+				reader.next();
+				qnames.add(readCharacters(reader));
 			}
 		}
 
 		return qnames;
 	}
 
-	private static QName readCharacters(XMLStreamReader reader, int eventType)
+	private static QName readCharacters(XMLStreamReader reader)
 			throws XMLStreamException {
 		QName qname = null;
 
 		while (reader.hasNext()) {
+			int eventType = reader.next();
 			switch (eventType) {
 			case XMLStreamReader.START_ELEMENT:
 				qname = reader.getName();
