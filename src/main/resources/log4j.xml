@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+
+	<appender name="AsyncFileappender" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="FileAppender" />
+	</appender>
+
+	<appender name="FileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="./logs/xml-security.log"/>
+		<param name="MaxFileSize" value="9048576"/>
+		<param name="MaxBackupIndex" value="10"/>
+		<param name="BufferSize" value="1000"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<root>
+		<level value="ERROR" />
+		<appender-ref ref="AsyncFileappender" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>
